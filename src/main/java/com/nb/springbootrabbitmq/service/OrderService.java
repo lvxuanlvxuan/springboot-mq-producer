@@ -49,13 +49,14 @@ public class OrderService {
 
     public void sendDirectOrder(OrderVO orderVO){
 
-        Message msg=MessageBuilder.withBody(JSON.toJSONBytes(orderVO)).build();
+//        Message msg=MessageBuilder.withBody(JSON.toJSONBytes(orderVO)).build();
         log.info("订单生成成功：{}",JSON.toJSONString(orderVO));
         String exchange="direct_order_exchange";
         String routingKeySms="sms";
         String routingKeyEmail="email";
-        orderProvider.senDirectMessage(msg,exchange,routingKeySms);
-        orderProvider.senDirectMessage(msg,exchange,routingKeyEmail);
+//        orderProvider.senDirectMessage(orderVO,exchange,routingKeySms);
+        rabbitTemplate.convertAndSend(exchange,routingKeyEmail,orderVO);
+        rabbitTemplate.convertAndSend(exchange,routingKeySms,orderVO);
         log.info("订单推送成功！");
     }
 
