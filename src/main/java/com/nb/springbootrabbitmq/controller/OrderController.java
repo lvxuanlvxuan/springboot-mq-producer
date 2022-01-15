@@ -46,12 +46,12 @@ public class OrderController {
     @PostMapping("/sendDead")
     public void sendDead(@Valid @RequestBody OrderVO orderVO){
         orderService.sendDeadOrder(orderVO);
-
     }
 
     @PostMapping("/sendTest")
     public void sendTest(@Valid @RequestBody OrderVO orderVO){
         orderService.sendTestOrder(orderVO);
-
     }
+
+
 }

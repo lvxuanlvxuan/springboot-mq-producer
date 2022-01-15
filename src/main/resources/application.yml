@@ -9,3 +9,10 @@ spring:
     port: 5672
     publisher-confirm-type: correlated
     publisher-returns: true
+  cloud:
+    consul:
+      host: 139.196.112.185
+      port: 8500
+#      discovery:
+#        healthCheckPath: /actuator/health
+#        healthCheckInterval: 15s

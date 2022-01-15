@@ -47,8 +47,11 @@ public class DirectRabbitMqConfiguration {
     public Queue deadDirectQueue(){
         Map<String,Object> args=new HashMap<>();
         args.put("x-message-ttl",3000);
-        args.put("x-dead-letter-exchange","direct_order_exchange");
-        args.put("x-dead-letter-routing-key","sms");
+        //args.put("x-max-length",5);//队列内容纳消息最大个数，超过此数则放进关联队列
+//        args.put("x-dead-letter-exchange","direct_order_exchange");
+        args.put("x-dead-letter-exchange","topic_order_exchange");
+//        args.put("x-dead-letter-routing-key","sms");
+        args.put("x-dead-letter-routing-key","topic.order.exchange.email.dead");
         return new Queue("direct.queue.dead",true,false,false,args);
     }
     /**

@@ -66,7 +66,7 @@ public class OrderService {
         String exchange="topic_order_exchange";
         String smsKey=String.format("%s.%s","topic.order.exchange.sms",orderVO.getId());
         String emailKey=String.format("%s.%s","topic.order.exchange.email",orderVO.getId());
-        rabbitTemplate.convertAndSend(exchange,smsKey,msg);
+        rabbitTemplate.convertAndSend(exchange,smsKey,orderVO);
         rabbitTemplate.convertAndSend(exchange,emailKey,msg);
         log.info("订单推送成功！");
     }
