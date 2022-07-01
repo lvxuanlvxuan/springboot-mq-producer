@@ -62,6 +62,12 @@ public class DirectRabbitMqConfiguration {
     public Queue ttlDirectQueue(){
         Map<String,Object> args=new HashMap<>();
         args.put("x-message-ttl",3000);
+        /**
+         * 1.队列名
+         * 2.是否持久化数据，false：mq停掉数据就会丢失
+         * 3.是否排他,false代表不排他所有消费者都可以访问，true代表排他只有第一次拥有他的消费者可以访问
+         * 4.是否自动删除，false代表mq停掉后自动删除队列
+         */
         return new Queue("direct.queue.ttl",true,false,false,args);
     }
 
