@@ -1,18 +1,18 @@
-package com.nb.springbootrabbitmq.v2.controller;
+package com.nb.springbootrabbitmq.v2.producer.impl;
 
-import com.nb.springbootrabbitmq.v2.service.WorkModelService;
+import com.nb.springbootrabbitmq.v2.constance.WorkModelConstance;
+import com.nb.springbootrabbitmq.v2.producer.WorkModelProducer;
 import com.nb.springbootrabbitmq.vo.OrderVO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * @Author: lvxuan
  * @program:
- * @Date: 2022/7/1 15:33
+ * @Date: 2022/7/1 16:31
  * @Version: 1.0
  * @motto: 而后乃将图南
  * @Description: des
@@ -29,19 +29,16 @@ import org.springframework.web.bind.annotation.RestController;
  * ▀▒▀▐▄█▄█▌▄░▀▒▒░░░░░░░░░░▒▒▒
  * You are not expected to understand this
  */
-@RestController
-@RequestMapping("/controller-work")
-public class WorkModelController {
+@Slf4j
+@Component
+public class WorkModelProducerImpl implements WorkModelProducer {
 
-    @Autowired
-    private WorkModelService workModelService;
+    @Resource(name = "myRabbitTemplate")
+    private RabbitTemplate rabbitTemplate;
 
-    @PostMapping("/send")
-    public ResponseEntity send(@RequestBody OrderVO vo) {
-        for (int i = 1; i <= 100; i++) {
-            vo.setNum(i);
-            workModelService.send(vo);
-        }
-        return ResponseEntity.ok("success");
+    @Override
+    public void send(OrderVO vo) {
+        rabbitTemplate.convertAndSend(WorkModelConstance.WORK_MODEL_QUEUE, vo);
+        log.info("work_model_queue发送消息成功：{}", vo);
     }
 }
