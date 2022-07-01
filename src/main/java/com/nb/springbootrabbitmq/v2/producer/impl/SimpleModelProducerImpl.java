@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @Author: lvxuan
@@ -41,5 +42,11 @@ public class SimpleModelProducerImpl implements SimpleModelProducer {
     public void send(OrderVO vo) {
         rabbitTemplate.convertAndSend(SimpleModelConstance.SIMPLE_MODEL_QUEUE, vo);
         log.info("发送消息成功，消息内容：{}", vo);
+    }
+
+    @Override
+    public void sendBatch(List<OrderVO> orderVOS) {
+        rabbitTemplate.convertAndSend(SimpleModelConstance.SIMPLE_MODEL_QUEUE_BATCH, orderVOS);
+        log.info("发送消息成功，消息内容：{}", orderVOS);
     }
 }

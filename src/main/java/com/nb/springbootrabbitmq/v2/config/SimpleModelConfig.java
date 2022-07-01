@@ -29,13 +29,24 @@ import org.springframework.context.annotation.Configuration;
 public class SimpleModelConfig {
 
     @Bean
-    public Queue simpleModelQueue(){
+    public Queue simpleModelQueue() {
         /**
          * 1.队列名称
          * 2.是否持久化数据
          * 3.是否排他（仅第一个连接的消费者可访问）
          * 4.是否自动删除（rabbit关闭后删除队列）
          */
-        return new Queue(SimpleModelConstance.SIMPLE_MODEL_QUEUE,true,false,false);
+        return new Queue(SimpleModelConstance.SIMPLE_MODEL_QUEUE, true, false, false);
+    }
+
+    @Bean
+    public Queue simpleModelQueueBatch() {
+        /**
+         * 1.队列名称
+         * 2.是否持久化数据
+         * 3.是否排他（仅第一个连接的消费者可访问）
+         * 4.是否自动删除（rabbit关闭后删除队列）
+         */
+        return new Queue(SimpleModelConstance.SIMPLE_MODEL_QUEUE_BATCH, true, false, false);
     }
 }

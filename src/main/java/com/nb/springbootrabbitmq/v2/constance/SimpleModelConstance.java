@@ -24,4 +24,6 @@ public class SimpleModelConstance {
 
     public static final String SIMPLE_MODEL_QUEUE = "simple_model_queue";
 
+    public static final String SIMPLE_MODEL_QUEUE_BATCH = "simple_model_queue_batch";
+
 }

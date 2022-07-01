@@ -2,6 +2,8 @@ package com.nb.springbootrabbitmq.v2.producer;
 
 import com.nb.springbootrabbitmq.vo.OrderVO;
 
+import java.util.List;
+
 /**
  * @Author: lvxuan
  * @program:
@@ -25,4 +27,6 @@ import com.nb.springbootrabbitmq.vo.OrderVO;
 public interface SimpleModelProducer {
 
     void send(OrderVO vo);
+
+    void sendBatch(List<OrderVO> orderVOS);
 }

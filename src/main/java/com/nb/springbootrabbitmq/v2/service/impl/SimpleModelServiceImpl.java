@@ -6,6 +6,8 @@ import com.nb.springbootrabbitmq.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Author: lvxuan
  * @program:
@@ -35,5 +37,10 @@ public class SimpleModelServiceImpl implements SimpleModelService {
     @Override
     public void send(OrderVO vo) {
         simpleModelProducer.send(vo);
+    }
+
+    @Override
+    public void sendBatch(List<OrderVO> orderVOS) {
+        simpleModelProducer.sendBatch(orderVOS);
     }
 }

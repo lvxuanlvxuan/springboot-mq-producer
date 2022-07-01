@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * @Author: lvxuan
  * @program:
@@ -40,6 +42,12 @@ public class SimpleModelController {
     public ResponseEntity send(@RequestBody OrderVO orderVO) {
         //调用simple模式发送消息方法
         simpleModelService.send(orderVO);
+        return ResponseEntity.ok("success");
+    }
+
+    @PostMapping("/sendBatch")
+    public ResponseEntity sendBatch(@RequestBody List<OrderVO> orderVOS) {
+        simpleModelService.sendBatch(orderVOS);
         return ResponseEntity.ok("success");
     }
 }
