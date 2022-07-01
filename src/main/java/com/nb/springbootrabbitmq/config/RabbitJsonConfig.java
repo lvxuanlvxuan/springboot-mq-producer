@@ -11,7 +11,8 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class RabbitJsonConfig {
-    @Bean
+
+    @Bean(name = "myRabbitTemplate")
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
         rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
