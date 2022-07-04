@@ -7,6 +7,11 @@ spring:
     virtual-host: /
     host: 139.196.112.185
     port: 5672
+    #NONE：默认值禁用发布确认模式
+    #CORRELATED：发布消息到broker触发回调方法
+    #SIMPLE：
+      #1.和correlated一样触发回调，
+      #2.在发布消息成功后使用rabbitTemplate调用waitForConfirms或waitForConfirmsOrDie方法等待broker节点返回发送结果，根据返回结果来判定下一步的逻辑，要注意的点是waitForConfirmsOrDie方法如果返回false则会关闭channel，则接下来无法发送消息到broker;
     publisher-confirm-type: correlated
     publisher-returns: true
   cloud:
